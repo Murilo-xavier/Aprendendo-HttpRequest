@@ -35,10 +35,15 @@ public class PrincipalComBusca {
         Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
         //Titulo meuTitulo = gson.fromJson(json, Titulo.class);
         TituloOmdb meuTituloOmdb = gson.fromJson(json, TituloOmdb.class);
-        System.out.println(meuTituloOmdb);
-        Titulo meuTitulo = new Titulo(meuTituloOmdb);
-        System.out.println(meuTitulo);
-        
+        System.out.println("\n-- MEU TITULO OMDB: "+ meuTituloOmdb);
+
+        try{
+            Titulo meuTitulo = new Titulo(meuTituloOmdb);
+            System.out.println("\n-- MEU TITULO: "+ meuTitulo);
+        }catch (Exception e){
+            System.out.println("Erro ao criar o objeto Titulo: " + e.getMessage());
+        }
+        System.out.println("--- FIM ---");
         sc.close();
     }
 }
