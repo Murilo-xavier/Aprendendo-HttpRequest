@@ -11,6 +11,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import br.com.alura.screenmatch.excecao.ErroDeConversaoDeAnoException;
 import br.com.alura.screenmatch.modelos.Titulo;
 import br.com.alura.screenmatch.modelos.TituloOmdb;
 
@@ -40,8 +41,8 @@ public class PrincipalComBusca {
         try{
             Titulo meuTitulo = new Titulo(meuTituloOmdb);
             System.out.println("\n-- MEU TITULO: "+ meuTitulo);
-        }catch (Exception e){
-            System.out.println("Erro ao criar o objeto Titulo: " + e.getMessage());
+        }catch (ErroDeConversaoDeAnoException e){
+            System.out.println(e.getMessage());
         }
         System.out.println("--- FIM ---");
         sc.close();
