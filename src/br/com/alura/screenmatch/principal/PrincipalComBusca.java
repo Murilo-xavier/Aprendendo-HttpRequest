@@ -21,7 +21,7 @@ public class PrincipalComBusca {
         var busca = sc.nextLine();
         
         String apiKey = "4d4d70c9";
-        String endereco = "https://www.omdbapi.com/?t=" + busca + "&apikey=" + apiKey;
+        String endereco = "https://www.omdbapi.com/?t=" + busca.replace(" ", "+") + "&apikey=" + apiKey;
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
