@@ -43,6 +43,8 @@ public class PrincipalComBusca {
             System.out.println("\n-- MEU TITULO: "+ meuTitulo);
         }catch (ErroDeConversaoDeAnoException e){
             System.out.println(e.getMessage());
+        }catch (IllegalArgumentException e){
+            System.out.println("Erro no argumento da busca: " + e.getMessage());
         }
         System.out.println("--- FIM ---");
         sc.close();
