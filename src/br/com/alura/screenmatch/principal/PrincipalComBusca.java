@@ -1,6 +1,5 @@
 package br.com.alura.screenmatch.principal;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ public class PrincipalComBusca {
         List<Titulo> listaTitulos = new ArrayList<>();
         
 
-        while (!interacaoUsuario.getBusca().equalsIgnoreCase("sair")) {
+        while (true) {
             interacaoUsuario.solicitarBusca();
 
             if (interacaoUsuario.getBusca().equalsIgnoreCase("sair")) {
