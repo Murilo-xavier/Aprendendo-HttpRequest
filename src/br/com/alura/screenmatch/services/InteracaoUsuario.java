@@ -9,7 +9,6 @@ public class InteracaoUsuario {
     public String solicitarBusca() {
         System.out.println("Digite um filme para busca: ");
         busca = sc.nextLine();
-        sc.close();
         return busca;
     }
 
