@@ -17,6 +17,7 @@ import com.google.gson.GsonBuilder;
 import br.com.alura.screenmatch.excecao.ErroDeConversaoDeAnoException;
 import br.com.alura.screenmatch.modelos.Titulo;
 import br.com.alura.screenmatch.modelos.TituloOmdb;
+import br.com.alura.screenmatch.services.HttpService;
 
 public class PrincipalComBusca {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -34,16 +35,8 @@ public class PrincipalComBusca {
                 break;
             }
 
-            String apiKey = "4d4d70c9";
-            String endereco = "https://www.omdbapi.com/?t=" + busca.replace(" ", "+") + "&apikey=" + apiKey;
 
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(endereco))
-                    .build();
-            HttpResponse<String> response = client
-                    .send(request, HttpResponse.BodyHandlers.ofString());
-            String json = response.body();
+            String json = HttpService.buscarDadosString(busca);
             System.out.println(json);
 
             // Titulo meuTitulo = gson.fromJson(json, Titulo.class);
