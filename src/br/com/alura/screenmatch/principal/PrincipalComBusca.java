@@ -15,30 +15,21 @@ import br.com.alura.screenmatch.modelos.Titulo;
 import br.com.alura.screenmatch.modelos.TituloOmdb;
 import br.com.alura.screenmatch.services.ConversorJson;
 import br.com.alura.screenmatch.services.HttpService;
+import br.com.alura.screenmatch.services.InteracaoUsuario;
 
 public class PrincipalComBusca {
     public static void main(String[] args) throws IOException, InterruptedException {
-        Scanner sc = new Scanner(System.in);
-        String busca = "";
+        InteracaoUsuario interacaoUsuario = new InteracaoUsuario();
         List<Titulo> listaTitulos = new ArrayList<>();
         Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).setPrettyPrinting().create();
 
-        while (!busca.equalsIgnoreCase("sair")) {
+        while (!interacaoUsuario.getBusca().equalsIgnoreCase("sair")) {
+            interacaoUsuario.solicitarBusca();
 
-            System.out.println("Digite um filme para busca: ");
-            busca = sc.nextLine();
-
-            if (busca.equalsIgnoreCase("sair")) {
+            if (interacaoUsuario.getBusca().equalsIgnoreCase("sair")) {
                 break;
             }
-
-
-            String json = HttpService.buscarDadosString(busca);
-            //System.out.println(json); // teste para verificar o json retornado da API
-
-            // Titulo meuTitulo = gson.fromJson(json, Titulo.class);
-            TituloOmdb meuTituloOmdb = ConversorJson.converterJsonEmTituloOmdb(json);
-            //System.out.println("\n-- MEU TITULO OMDB: " + meuTituloOmdb); // teste para verificar o objeto criado a partir do json
+            String json = HttpService.buscarDadosString(interacaoUsuario.getBusca());
 
             try {
                 Titulo meuTitulo = ConversorJson.converterJsonEmTitulo(json);
@@ -55,6 +46,5 @@ public class PrincipalComBusca {
         escrita.write(gson.toJson(listaTitulos));
         escrita.close();
         System.out.println("--- FIM ---");
-        sc.close();
     }
 }
