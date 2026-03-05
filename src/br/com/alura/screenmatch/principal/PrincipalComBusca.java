@@ -2,10 +2,6 @@ package br.com.alura.screenmatch.principal;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,6 +13,7 @@ import com.google.gson.GsonBuilder;
 import br.com.alura.screenmatch.excecao.ErroDeConversaoDeAnoException;
 import br.com.alura.screenmatch.modelos.Titulo;
 import br.com.alura.screenmatch.modelos.TituloOmdb;
+import br.com.alura.screenmatch.services.ConversorJson;
 import br.com.alura.screenmatch.services.HttpService;
 
 public class PrincipalComBusca {
@@ -37,15 +34,14 @@ public class PrincipalComBusca {
 
 
             String json = HttpService.buscarDadosString(busca);
-            System.out.println(json);
+            //System.out.println(json); // teste para verificar o json retornado da API
 
             // Titulo meuTitulo = gson.fromJson(json, Titulo.class);
-            TituloOmdb meuTituloOmdb = gson.fromJson(json, TituloOmdb.class);
-            System.out.println("\n-- MEU TITULO OMDB: " + meuTituloOmdb);
+            TituloOmdb meuTituloOmdb = ConversorJson.converterJsonEmTituloOmdb(json);
+            //System.out.println("\n-- MEU TITULO OMDB: " + meuTituloOmdb); // teste para verificar o objeto criado a partir do json
 
             try {
-                Titulo meuTitulo = new Titulo(meuTituloOmdb);
-                System.out.println("\n-- MEU TITULO: " + meuTitulo);
+                Titulo meuTitulo = ConversorJson.converterJsonEmTitulo(json);
                 listaTitulos.add(meuTitulo);
 
             } catch (ErroDeConversaoDeAnoException e) {
